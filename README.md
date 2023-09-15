@@ -19,6 +19,15 @@
 - eslint
 - eslint-plugin-vue
 
+### StyleLint
+
+- stylelint
+- stylelint-config-recommended
+- stylelint-config-recommended-vue
+- stylelint-config-standard
+- stylelint-config-recommended-scss
+- postcss-html
+
 ### Prettier
 
 - @vue/eslint-config-prettier

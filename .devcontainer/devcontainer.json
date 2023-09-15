@@ -10,14 +10,18 @@
       "extensions": [
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "Vue.volar"
+        "Vue.volar",
+        "stylelint.vscode-stylelint"
       ],
       "settings": {
         "editor.codeActionsOnSave": {
           "source.fixAll": true
         },
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "stylelint.enable": true,
+        "stylelint.snippet": ["css", "postcss", "scss", "vue"],
+        "stylelint.validate": ["css", "postcss", "scss", "vue"]
       }
     }
   }

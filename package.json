@@ -25,7 +25,13 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "nuxt": "^3.7.3",
+    "postcss-html": "^1.5.0",
     "prettier": "^3.0.3",
+    "stylelint": "^15.10.3",
+    "stylelint-config-recommended": "^13.0.0",
+    "stylelint-config-recommended-scss": "^13.0.0",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard": "^34.0.0",
     "typescript": "^5.2.2"
   },
   "config": {
@@ -39,9 +45,8 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,tsx,js,vue}": [
-      "prettier --write",
-      "eslint"
-    ]
+    "./**/*.{ts,tsx,js,vue}": "eslint --fix",
+    "./**/*.{css,scss,sass,html,vue}": "stylelint --fix --ignore-path .gitignore",
+    "*": "prettier --write"
   }
 }
