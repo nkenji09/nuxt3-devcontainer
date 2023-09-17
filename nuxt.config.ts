@@ -29,6 +29,20 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' }
   },
   /**
+   * ビルド
+   */
+  modules: ['nuxt-vitest'],
+  alias: {
+    '@vitest': '../.tools/vitest'
+  },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        types: ['vitest/importMeta', 'vitest/globals']
+      }
+    }
+  },
+  /**
    * デバッグ
    */
   devtools: { enabled: isNotProduction },

@@ -117,3 +117,75 @@ export const getDebuggingLoggerLevel = (): undefined | TLogLevel => {
   if (!cookie) return undefined
   return cookie in LOG_LEVEL ? (cookie as TLogLevel) : undefined
 }
+
+/**
+ * Vitest
+ */
+if (import.meta.vitest) {
+  describe('utils/logger', () => {
+    afterEach(() => {
+      vi.clearAllMocks()
+    })
+    describe('generateLogger', () => {
+      test.concurrent(
+        'Vitest が ClientSide で実行されているので client側のメソッドが実行される',
+        () => {
+          /* 準備 */
+          const hooks: Partial<TLoggerHooks> = {
+            clientDebug: () => {},
+            serverDebug: () => {}
+          }
+          const spyClientDebug = vi.spyOn(hooks, 'clientDebug')
+          const spyServerDebug = vi.spyOn(hooks, 'serverDebug')
+
+          /* 実行 */
+          const loggerLevel: TLogLevel = 'debug'
+          const logger = generateLogger(loggerLevel, loggerLevel, hooks)
+          logger.debug('test')
+
+          /* 検証 */
+          expect(spyClientDebug).toHaveBeenCalled()
+          expect(spyServerDebug).not.toHaveBeenCalled()
+        }
+      )
+
+      test.concurrent(
+        'Logger Level(info) > Messsaeg Level(debug) の場合はログが出力されない',
+        () => {
+          /* 準備 */
+          const hooks: Partial<TLoggerHooks> = {
+            clientDebug: () => {}
+          }
+          const spy = vi.spyOn(hooks, 'clientDebug')
+
+          /* 実行 */
+          const loggerLevel: TLogLevel = 'info'
+          const logger = generateLogger(loggerLevel, loggerLevel, hooks)
+          logger.debug('test')
+
+          /* 検証 */
+          expect(spy).not.toHaveBeenCalled()
+        }
+      )
+
+      test.concurrent(
+        'Logger Level(debug) < Messsaeg Level(info) の場合はログが出力される',
+        () => {
+          /* 準備 */
+          const hooks: Partial<TLoggerHooks> = {
+            clientInfo: () => {}
+          }
+          const spy = vi.spyOn(hooks, 'clientInfo')
+
+          /* 実行 */
+          const loggerLevel: TLogLevel = 'debug'
+          const logger = generateLogger(loggerLevel, loggerLevel, hooks)
+          logger.info('test')
+
+          /* 検証 */
+          expect(spy).toHaveBeenCalled()
+        }
+      )
+    })
+  })
+}

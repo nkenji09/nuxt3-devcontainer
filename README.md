@@ -26,6 +26,17 @@
 
 ※ ログレベルの種類（debug, info, warn, error, none）
 
+## 主なGitの運用
+
+1. 作業ブランチを作成
+   - 例： `git checkout -b feat-XXXXX`
+2. commitを作成（NPMスクリプトを利用すること）
+   - `npm run commit`
+3. 作業ブランチをPush
+   - 例： `git push origin HEAD`
+4. PRを作成
+5. approveされたら mainブランチにマージ
+
 ---
 
 # node_modules

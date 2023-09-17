@@ -12,7 +12,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "precommit": "lint-staged",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "test": "vitest --watch"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -25,9 +26,11 @@
     "eslint": "^8.49.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^9.17.0",
+    "happy-dom": "^11.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "nuxt": "^3.7.3",
+    "nuxt-vitest": "0.10.5",
     "postcss-html": "^1.5.0",
     "prettier": "^3.0.3",
     "stylelint": "^15.10.3",
@@ -35,7 +38,8 @@
     "stylelint-config-recommended-scss": "^13.0.0",
     "stylelint-config-recommended-vue": "^1.5.0",
     "stylelint-config-standard": "^34.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.33.0"
   },
   "config": {
     "commitizen": {
@@ -50,6 +54,6 @@
   "lint-staged": {
     "./**/*.{ts,tsx,js,vue}": "eslint --fix",
     "./**/*.{css,scss,sass,html,vue}": "stylelint --fix --ignore-path .gitignore",
-    "*": "prettier --write"
+    "./**/*.{ts,tsx,js,vue,css,scss,sass,html,vue,md,json}": "prettier --write"
   }
 }
