@@ -1,5 +1,9 @@
 import { TLogLevel, TLogger, generateLogger } from '@/app/utils/logger'
 
+/**
+ * デフォルトのロガーを生成する
+ *  - ログレベルを変更したい場合は generateLogger を利用してロガーを生成する
+ */
 export default defineNuxtPlugin({
   name: 'logger',
   enforce: 'pre',
@@ -15,7 +19,6 @@ export default defineNuxtPlugin({
     )
     return {
       provide: {
-        // デフォルトのロガー（ログレベルを変更したい場合は generateLogger を利用してロガーを生成する）
         logger
       }
     }

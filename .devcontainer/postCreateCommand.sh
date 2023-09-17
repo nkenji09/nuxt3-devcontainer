@@ -17,4 +17,5 @@ cd /workspace
 [ ! -d \"node_modules\" ] && sudo chown -R node:node node_modules
 npm ci
 
-
+# もし .env.development がなければ作成する
+[ ! -f \".env.development\" ] && cp .env.development.sample .env.development

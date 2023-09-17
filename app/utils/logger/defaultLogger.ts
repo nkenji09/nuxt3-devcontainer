@@ -15,7 +15,7 @@ export const defaultLogger: TLoggerHooks = {
     console.error(...obj)
   },
   clientDev: (...obj: TLogObject) => {
-    console.log('--- DELETE ME !!! ---')
+    console.log('--- DELETE clientDev !!! ---')
     console.log(...obj)
   },
   serverDebug: (...obj: TLogObject) => {
@@ -31,7 +31,7 @@ export const defaultLogger: TLoggerHooks = {
     console.error(...obj)
   },
   serverDev: (...obj: TLogObject) => {
-    console.log('--- DELETE ME !!! ---')
+    console.log('--- DELETE serverDev !!! ---')
     console.log(...obj)
   }
 }
