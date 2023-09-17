@@ -18,4 +18,9 @@ cd /workspace
 npm ci
 
 # もし .env.development がなければ作成する
-[ ! -f \".env.development\" ] && cp .env.development.sample .env.development
+if [ ! -f ".env.development" ]; then
+  echo ".env.development does not exist, copying..."
+  cp .env.development.sample .env.development
+else
+  echo ".env.development exists."
+fi
