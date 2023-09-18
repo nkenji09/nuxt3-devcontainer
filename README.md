@@ -81,6 +81,10 @@
 - stylelint-config-recommended-scss
 - postcss-html
 
+### StyleLint - CSS順を自動整形
+
+- stylelint-config-recess-order
+
 ### Prettier
 
 - @vue/eslint-config-prettier

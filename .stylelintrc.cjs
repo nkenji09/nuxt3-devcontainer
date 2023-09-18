@@ -3,7 +3,8 @@ module.exports = {
     'stylelint-config-recommended',
     'stylelint-config-standard',
     'stylelint-config-recommended-vue',
-    'stylelint-config-recommended-scss'
+    'stylelint-config-recommended-scss',
+    'stylelint-config-recess-order'
   ],
   overrides: [
     {
