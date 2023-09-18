@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { TLoggerHooks, TLogObject } from '@/app/utils/logger'
+import { TLoggerHooks, TLogObject } from '~/app/utils/logger'
 
 export const defaultLogger: TLoggerHooks = {
   clientDebug: (...obj: TLogObject) => {

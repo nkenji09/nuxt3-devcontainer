@@ -1,4 +1,4 @@
-import { TLogLevel, TLogger, generateLogger } from '@/app/utils/logger'
+import { TLogLevel, TLogger, generateLogger } from '~/app/utils/logger'
 
 /**
  * デフォルトのロガーを生成する

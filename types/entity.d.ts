@@ -1,4 +1,4 @@
-import { BaseEntity } from '@/app/entity'
+import { BaseEntity } from '~/app/entity'
 
 export type OmitMarker<T extends BaseEntity<Symbol>> = Omit<T, '_marker'>
 export type Unvalidated<

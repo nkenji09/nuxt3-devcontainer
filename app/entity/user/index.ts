@@ -5,10 +5,10 @@ import {
   isNumberId,
   optional,
   validate
-} from '@/app/entity'
-import { ValidationError } from '@/app/utils/error'
-import { Unvalidated, Raw, OmitMarker } from '@/types/entity'
-import { isNotEmptyString } from '@/app/utils/validator'
+} from '~/app/entity'
+import { ValidationError } from '~/app/utils/error'
+import { isNotEmptyString } from '~/app/utils/validator'
+import { Unvalidated, Raw, OmitMarker } from '~/types/entity'
 
 const S_VALIDATED = Symbol('ValidatedUser')
 const S_UNVALIDATED = Symbol('UnvalidatedUser')

@@ -68,6 +68,10 @@
 - eslint
 - eslint-plugin-vue
 
+### ESLint - import順を自動整形
+
+- eslint-plugin-import
+
 ### StyleLint
 
 - stylelint

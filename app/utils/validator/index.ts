@@ -1,5 +1,5 @@
 import { Result, err, ok } from 'neverthrow'
-import { ValidationError } from '@/app/utils/error'
+import { ValidationError } from '~/app/utils/error'
 
 /*
  * Type Guard

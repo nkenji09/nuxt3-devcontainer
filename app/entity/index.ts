@@ -1,8 +1,8 @@
 import { Result, err, ok } from 'neverthrow'
-import { typedEntries, typedKeys } from '../utils/object'
-import { ValidationError } from '@/app/utils/error'
-import { Validator, isNaturalNumber } from '@/app/utils/validator'
-import { ToUnknow } from '@/types/entity'
+import { ValidationError } from '~/app/utils/error'
+import { typedEntries, typedKeys } from '~/app/utils/object'
+import { Validator, isNaturalNumber } from '~/app/utils/validator'
+import { ToUnknow } from '~/types/entity'
 
 export type BaseEntity<T extends Symbol> = {
   _marker: T

@@ -1,5 +1,5 @@
-import { isServerSide } from '@/app/utils/mode'
-import { defaultLogger } from '@/app/utils/logger/defaultLogger'
+import { defaultLogger } from '~/app/utils/logger/defaultLogger'
+import { isServerSide } from '~/app/utils/mode'
 
 /**
  * ログレベルの定義

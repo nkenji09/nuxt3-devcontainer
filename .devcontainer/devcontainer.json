@@ -21,7 +21,8 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "stylelint.enable": true,
         "stylelint.snippet": ["css", "postcss", "scss", "vue"],
-        "stylelint.validate": ["css", "postcss", "scss", "vue"]
+        "stylelint.validate": ["css", "postcss", "scss", "vue"],
+        "typescript.preferences.importModuleSpecifier": "non-relative"
       }
     }
   }
