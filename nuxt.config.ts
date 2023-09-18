@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   typescript: {
     tsConfig: {
       compilerOptions: {
-        types: ['vitest/importMeta', 'vitest/globals']
+        types: ['../types/entity.d', 'vitest/importMeta', 'vitest/globals']
       }
     }
   },
