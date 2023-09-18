@@ -43,6 +43,12 @@
 
 ※ 依存モジュールの用途を常に明確にしておく
 
+## dependencies
+
+### Result型
+
+- neverthrow
+
 ## devDependencies
 
 ### TypeScript

@@ -15,6 +15,9 @@
     "commit": "git-cz",
     "test": "vitest --watch"
   },
+  "dependencies": {
+    "neverthrow": "^6.0.0"
+  },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
