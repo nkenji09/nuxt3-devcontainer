@@ -1,7 +1,7 @@
 import { Result, ok } from 'neverthrow'
 import {
-  BaseEntity,
-  FieldValidators,
+  TBaseEntity,
+  TFieldValidators,
   isNumberId,
   optional,
   validate
@@ -15,26 +15,26 @@ const S_UNVALIDATED = Symbol('UnvalidatedUser')
 
 /* 型定義 */
 // Validated
-export interface ValidatedUser extends BaseEntity<typeof S_VALIDATED> {
+export interface TValidatedUser extends TBaseEntity<typeof S_VALIDATED> {
   id: number
   name: string
 }
-export const fieldValidators: FieldValidators<OmitMarker<ValidatedUser>> = {
+export const fieldValidators: TFieldValidators<OmitMarker<TValidatedUser>> = {
   id: isNumberId,
   name: isNotEmptyString
 }
 
 // Unvalidated
-export type UnvalidatedUser = Unvalidated<ValidatedUser, typeof S_UNVALIDATED>
-export const unvalidatedFieldValidators: FieldValidators<
-  OmitMarker<UnvalidatedUser>
+export type TUnvalidatedUser = Unvalidated<TValidatedUser, typeof S_UNVALIDATED>
+export const unvalidatedFieldValidators: TFieldValidators<
+  OmitMarker<TUnvalidatedUser>
 > = {
   id: optional(fieldValidators.id),
   name: optional(fieldValidators.name)
 }
 
 // Validated型の総称（派生型を含む）
-export type User = ValidatedUser
+export type TUser = TValidatedUser
 
 /* Workflow */
 /**
@@ -44,15 +44,15 @@ export type User = ValidatedUser
  *  - 将来的には利用しない状態にする
  */
 export const trustUser = (
-  rawData: Raw<ValidatedUser>
-): Result<ValidatedUser, ValidationError> => {
-  useNuxtApp().$logger.info('FIXME: trustUser が使用されました')
-  useNuxtApp().$logger.debug('trustUser: request', rawData)
+  rawData: Raw<TValidatedUser>
+): Result<TValidatedUser, ValidationError> => {
+  infoLog('FIXME: trustUser が使用されました')
+  variablesLog('trustUser', rawData)
   const response = {
     ...rawData,
     _marker: S_VALIDATED
-  } as ValidatedUser
-  useNuxtApp().$logger.debug('trustUser: response', response)
+  } as TValidatedUser
+  variablesLog('trustUser', response)
   return ok(response)
 }
 
@@ -60,19 +60,19 @@ export const trustUser = (
  * RawData => Unvalidated
  */
 export const toUnvalidatedUser = (
-  rawData: Raw<UnvalidatedUser>
-): Result<UnvalidatedUser, ValidationError> => {
-  useNuxtApp().$logger.debug('toUnvalidatedUser: request', rawData)
-  const result = validate<UnvalidatedUser>(rawData, unvalidatedFieldValidators)
-  useNuxtApp().$logger.debug('toUnvalidatedUser: result', result)
+  rawData: Raw<TUnvalidatedUser>
+): Result<TUnvalidatedUser, ValidationError> => {
+  debugLog('toUnvalidatedUser: request', rawData)
+  const result = validate<TUnvalidatedUser>(rawData, unvalidatedFieldValidators)
+  debugLog('toUnvalidatedUser: result', result)
 
   return result.andThen((unvalidatedData) => {
     const response = {
       ...unvalidatedData,
       _marker: S_UNVALIDATED
-    } as UnvalidatedUser
+    } as TUnvalidatedUser
 
-    useNuxtApp().$logger.debug('toUnvalidatedUser: response', result)
+    debugLog('toUnvalidatedUser: response', result)
     return ok(response)
   })
 }
@@ -81,13 +81,13 @@ export const toUnvalidatedUser = (
  * Unvalidated => Validated
  */
 export const validateUser = (
-  unvalidatedData: UnvalidatedUser
-): Result<ValidatedUser, ValidationError> => {
-  const result = validate<ValidatedUser>(unvalidatedData, fieldValidators)
+  unvalidatedData: TUnvalidatedUser
+): Result<TValidatedUser, ValidationError> => {
+  const result = validate<TValidatedUser>(unvalidatedData, fieldValidators)
   return result.andThen((validatedData) =>
     ok({
       ...validatedData,
       _marker: S_VALIDATED
-    } as ValidatedUser)
+    } as TValidatedUser)
   )
 }

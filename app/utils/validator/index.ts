@@ -12,7 +12,7 @@ export const isEmptyString = (data: unknown): data is '' => data === ''
 /*
  * Result Type Guard
  */
-export type Validator<T> = (_data: unknown) => Result<T, ValidationError>
+export type TValidator<T> = (_data: unknown) => Result<T, ValidationError>
 
 export const isNotUndefined = <T>(
   data: T
@@ -30,13 +30,13 @@ export const isNotNull = <T>(
     : err(new ValidationError('ERR_NULL'))
 }
 
-export const isString: Validator<string> = (data: unknown) => {
+export const isString: TValidator<string> = (data: unknown) => {
   return typeof data === 'string'
     ? ok(data)
     : err(new ValidationError('ERR_NOT_STRING_TYPE'))
 }
 
-export const isNotEmptyString: Validator<string> = (data: unknown) => {
+export const isNotEmptyString: TValidator<string> = (data: unknown) => {
   return isString(data).andThen((str) => {
     return str.length > 0
       ? ok(str)
@@ -44,13 +44,13 @@ export const isNotEmptyString: Validator<string> = (data: unknown) => {
   })
 }
 
-export const isNumber: Validator<number> = (data: unknown) => {
+export const isNumber: TValidator<number> = (data: unknown) => {
   return typeof data === 'number'
     ? ok(data)
     : err(new ValidationError('ERR_NOT_NUMBER_TYPE'))
 }
 
-export const isNaturalNumber: Validator<number> = (data: unknown) => {
+export const isNaturalNumber: TValidator<number> = (data: unknown) => {
   return isNumber(data).andThen((num) => {
     return num >= 0
       ? ok(num)

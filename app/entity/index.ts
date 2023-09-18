@@ -1,18 +1,18 @@
 import { Result, err, ok } from 'neverthrow'
 import { ValidationError } from '~/app/utils/error'
 import { typedEntries, typedKeys } from '~/app/utils/object'
-import { Validator, isNaturalNumber } from '~/app/utils/validator'
+import { TValidator, isNaturalNumber } from '~/app/utils/validator'
 import { ToUnknow } from '~/types/entity'
 
-export type BaseEntity<T extends Symbol> = {
+export type TBaseEntity<T extends Symbol> = {
   _marker: T
 }
 
 /*
  * Validation
  */
-export type FieldValidators<T> = {
-  [K in keyof T]: Validator<T[K]>
+export type TFieldValidators<T> = {
+  [K in keyof T]: TValidator<T[K]>
 }
 /**
  * 下記のような利用シーンを想定
@@ -26,7 +26,7 @@ export type FieldValidators<T> = {
  */
 export const validate = <T extends Object, P = ToUnknow<T>>(
   data: P,
-  validators: FieldValidators<P>
+  validators: TFieldValidators<P>
 ): Result<T, ValidationError> => {
   const results = typedEntries(validators).reduce(
     (reduced, [field, validator]) => {
@@ -57,7 +57,7 @@ export const validate = <T extends Object, P = ToUnknow<T>>(
  */
 const ALLOWED_ERROR_CODES = ['ERR_UNDEFINED', 'ERR_NULL', 'ERR_EMPTY_STRING']
 export const optional =
-  <T>(validator: Validator<T>) =>
+  <T>(validator: TValidator<T>) =>
   (data: unknown): Result<T | undefined, ValidationError> =>
     validator(data).match<Result<T | undefined, ValidationError>>(
       (value) => ok(value),
@@ -65,5 +65,5 @@ export const optional =
         ALLOWED_ERROR_CODES.includes(error.code) ? ok(undefined) : err(error)
     )
 
-export const isNumberId: Validator<number> = (data: unknown) =>
+export const isNumberId: TValidator<number> = (data: unknown) =>
   isNaturalNumber(data)

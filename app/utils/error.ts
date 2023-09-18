@@ -6,11 +6,11 @@ const ERROR_CODE = {
   ERR_NOT_STRING_TYPE: 'ERR_NOT_STRING_TYPE',
   ERR_NOT_NUMBER_TYPE: 'ERR_NOT_NUMBER_TYPE'
 } as const
-type ErrorCode = (typeof ERROR_CODE)[keyof typeof ERROR_CODE]
+type TErrorCode = (typeof ERROR_CODE)[keyof typeof ERROR_CODE]
 
 export class CustomError extends Error {
-  readonly code: ErrorCode
-  constructor(code: ErrorCode, message?: string, options?: ErrorOptions) {
+  readonly code: TErrorCode
+  constructor(code: TErrorCode, message?: string, options?: ErrorOptions) {
     super(message, options)
     this.code = code
   }
