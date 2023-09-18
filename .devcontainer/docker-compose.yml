@@ -9,7 +9,7 @@ services:
       - node_modules_volume:/workspace/node_modules:cached
       - ..:/workspace:cached
       - ~/.ssh:/home/node/.ssh_copy:cached
-      - ~/.gitconfig:/home/node/.gitconfig:ro
+      - ~/.gitconfig:/home/node/.gitconfig
     tty: true
 
 volumes:
