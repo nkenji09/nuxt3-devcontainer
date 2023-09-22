@@ -4,7 +4,7 @@ import { typedEntries, typedKeys } from '~/app/utils/object'
 import { TValidator, isNaturalNumber } from '~/app/utils/validator'
 import { ToUnknow } from '~/types/entity'
 
-export type TBaseEntity<T extends Symbol> = {
+export type TBaseEntity<T extends string> = {
   _marker: T
 }
 
@@ -53,7 +53,7 @@ export const validate = <T extends Object, P = ToUnknow<T>>(
 }
 
 /*
- * Validation holper
+ * Validation helper
  */
 const ALLOWED_ERROR_CODES = ['ERR_UNDEFINED', 'ERR_NULL', 'ERR_EMPTY_STRING']
 export const optional =
