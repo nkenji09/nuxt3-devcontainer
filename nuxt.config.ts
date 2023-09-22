@@ -42,6 +42,9 @@ export default defineNuxtConfig({
       }
     }
   },
+  imports: {
+    dirs: ['app/**']
+  },
   /**
    * デバッグ
    */

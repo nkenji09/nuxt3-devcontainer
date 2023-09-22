@@ -1,3 +1,7 @@
+<script setup>
+  useApp().entry()
+</script>
+
 <template>
   <div id="app">
     <NuxtLayout>

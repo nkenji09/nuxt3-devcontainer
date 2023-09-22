@@ -1,10 +1,17 @@
 <script lang="ts" setup>
-  useNuxtApp().$logger.info('test', useRuntimeConfig())
+  import { variablesLog } from '~/shorthand/logger'
+
   const mode = useRuntimeConfig().public.appMode
+  variablesLog({ mode })
+
+  const user = useUser().user
 </script>
 
 <template>
-  <div>Page: index {{ mode }}</div>
+  <div>
+    Page: index {{ mode }}
+    <p>User Name: {{ user.name }}</p>
+  </div>
 </template>
 
 <style scoped>
