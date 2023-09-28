@@ -1,16 +1,15 @@
 <script lang="ts" setup>
-  import { variablesLog } from '~/shorthand/logger'
-
   const mode = useRuntimeConfig().public.appMode
-  variablesLog({ mode })
+  useNuxtApp().$logger.variables({ mode })
 
-  const user = useUser().user
+  const { isGuest, currentUser } = storeToRefs(useUser())
 </script>
 
 <template>
   <div>
-    Page: index {{ mode }}
-    <p>User Name: {{ user.name }}</p>
+    <p>Page: index {{ mode }}</p>
+    <p>User isGuest: {{ isGuest }}</p>
+    <p>User Name: {{ currentUser.name }}</p>
   </div>
 </template>
 

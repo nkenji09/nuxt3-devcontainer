@@ -1,4 +1,5 @@
 const ERROR_CODE = {
+  ERR_TIMEOUT: 'ERR_TIMEOUT',
   ERR_UNDEFINED: 'ERR_UNDEFINED',
   ERR_NULL: 'ERR_NULL',
   ERR_EMPTY_STRING: 'ERR_EMPTY_STRING',
@@ -17,3 +18,8 @@ export class CustomError extends Error {
 }
 export class FetchError extends CustomError {}
 export class ValidationError extends CustomError {}
+export class TimeoutError extends CustomError {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(ERROR_CODE.ERR_TIMEOUT, message, options)
+  }
+}

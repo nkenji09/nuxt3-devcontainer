@@ -8,7 +8,6 @@ import {
 } from '~/app/entity'
 import { ValidationError } from '~/app/utils/error'
 import { isNotEmptyString } from '~/app/utils/validator'
-// import { debugLog, fixMeLog, variablesLog } from '~/shorthand/logger'
 import { Unvalidated, Raw, OmitMarker } from '~/types/entity'
 
 const S_VALIDATED = 'ValidatedUser'

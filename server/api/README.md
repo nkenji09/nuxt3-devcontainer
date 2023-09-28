@@ -1,0 +1,4 @@
+- 本ディレクトリは mockup用 APIサーバーです
+- NUXT_PUBLIC_API_BASE_URL の値が空の場合のみこちらが利用されます
+- 開発中は aspida を経由して mockup用 APIが呼び出されます
+- リリース時の CI でソースコードのビルド前に server ディレクトリ以下を削除します

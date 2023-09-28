@@ -24,6 +24,10 @@ export interface TLogger {
   warn(...obj: TLogObject): void
   error(...obj: TLogObject): void
   dev(...obj: TLogObject): void
+  variables(vars: Record<string, any>): void
+  fixme(message: string, ...obj: TLogObject): void
+  callHook(hookName: string, ...params: TLogObject): void
+  hook(hookName: string): void
 }
 
 /**
@@ -60,7 +64,8 @@ export const generateLogger = (
       clientSideLoggerLevel,
       messageLevel: logLevel
     })
-  return {
+
+  const basic = {
     debug: (...obj: TLogObject) => {
       if (!isWritableInner('debug')) return
       isServerSide() ? hooks.serverDebug(...obj) : hooks.clientDebug(...obj)
@@ -80,6 +85,32 @@ export const generateLogger = (
     dev: (...obj: TLogObject) => {
       if (!isWritableInner('dev')) return
       isServerSide() ? hooks.serverDev(...obj) : hooks.clientDev(...obj)
+    }
+  }
+  return {
+    ...basic,
+    variables: (vars: Record<string, any>) => {
+      if (!isWritableInner('debug')) return
+      const caller = getCaller()
+      basic.debug(`VAR ... ${caller}`)
+      Object.entries(vars).forEach(([key, value]) => {
+        basic.debug(` - ${key}:`, value)
+      })
+    },
+    fixme: (message: string, ...obj: TLogObject) => {
+      if (!isWritableInner('info')) return
+      const caller = getCaller()
+      basic.info(`FIXME ... ${caller}`)
+      basic.info(message, ...obj)
+    },
+    callHook: (hookKey: string, ...params: TLogObject) => {
+      basic.info(`📢 ${hookKey}`)
+      basic.debug(`call ${hookKey} with...`, ...params)
+    },
+    hook: (hookKey: string) => {
+      if (!isWritableInner('info')) return
+      const caller = getCaller(4)
+      basic.info(`🎧 ${hookKey} ... ${caller}`)
     }
   }
 }
@@ -116,6 +147,23 @@ export const getDebuggingLoggerLevel = (): undefined | TLogLevel => {
   const cookie = useCookie(debuggingKey).value
   if (!cookie) return undefined
   return cookie in LOG_LEVEL ? (cookie as TLogLevel) : undefined
+}
+
+/**
+ * 呼び出し元情報の取得
+ */
+const getCaller = (depth: number = 3) => {
+  const stackTrace = getStackTrace() || []
+  return stackTrace[depth]?.toString() || 'Unknown'
+}
+const getStackTrace = () => {
+  const orig = Error.prepareStackTrace
+  Error.prepareStackTrace = (_, stack) => stack
+  const err = new Error('ref')
+  Error.captureStackTrace(err, getStackTrace)
+  const stack = err.stack
+  Error.prepareStackTrace = orig
+  return stack
 }
 
 /**
