@@ -10,6 +10,8 @@ services:
       - ..:/workspace:cached
       - ~/.ssh:/home/node/.ssh_copy:cached
       - ~/.gitconfig:/home/node/.gitconfig
+    ports:
+      - 24678:24678 # HMR用のポートを追加
     tty: true
 
 volumes:

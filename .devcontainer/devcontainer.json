@@ -10,8 +10,9 @@
       "extensions": [
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
         "Vue.volar",
-        "stylelint.vscode-stylelint"
+        "Vue.vscode-typescript-vue-plugin"
       ],
       "settings": {
         "editor.codeActionsOnSave": {
