@@ -3,20 +3,33 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build --dotenv .env.development",
-    "build-staging": "nuxt build --dotenv .env.staging",
-    "build-production": "nuxt build --dotenv .env.production",
-    "dev": "nuxt dev --dotenv .env.development",
-    "dev-staging": "nuxt dev --dotenv .env.staging",
-    "dev-production": "nuxt dev --dotenv .env.production",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "precommit": "lint-staged",
+    "//": "■■■■■■■■■■■■■■■ hooks ■■■■■■■■■■■■■■■■■■■",
+    "dev": "run-p dev:*",
     "commit": "git-cz",
-    "test": "vitest --watch"
+    "build": "run-p build:*",
+    "build-staging": "run-p build-staging:* build:api",
+    "build-production": "run-p build-production:* build:api",
+    "build:nuxt": "nuxt build --dotenv .env.development",
+    "build-staging:nuxt": "nuxt build --dotenv .env.staging",
+    "build-production:nuxt": "nuxt build --dotenv .env.production",
+    "build:api": "aspida -c aspida.config.cjs",
+    "dev-staging": "run-p dev-staging:* dev:api",
+    "dev-production": "run-p dev-production:* dev:api",
+    "dev:nuxt": "nuxt dev --dotenv .env.development",
+    "dev-staging:nuxt": "nuxt dev --dotenv .env.staging",
+    "dev-production:nuxt": "nuxt dev --dotenv .env.production",
+    "dev:api": "aspida --watch -c aspida.config.cjs",
+    "test": "vitest --watch",
+    "precommit": "lint-staged",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "neverthrow": "^6.0.0"
+    "@aspida/fetch": "^1.14.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
+    "@pinia/nuxt": "^0.4.11",
+    "aspida": "^1.14.0",
+    "neverthrow": "^6.0.0",
+    "pinia": "^2.1.6"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -33,6 +46,7 @@
     "happy-dom": "^11.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
+    "npm-run-all": "^4.1.5",
     "nuxt": "^3.7.3",
     "nuxt-vitest": "0.10.5",
     "postcss-html": "^1.5.0",
@@ -60,5 +74,8 @@
     "./**/*.{ts,tsx,js,vue}": "eslint --fix",
     "./**/*.{css,scss,sass,html,vue}": "stylelint --fix --ignore-path .gitignore",
     "./**/*.{ts,tsx,js,vue,css,scss,sass,html,vue,md,json}": "prettier --write"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

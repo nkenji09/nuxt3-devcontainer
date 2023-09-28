@@ -45,6 +45,19 @@
 
 ## dependencies
 
+### Store
+
+- pinia
+- @pinia/nuxt
+- @pinia-plugin-persistedstate/nuxt
+
+※ overrides: { vue: latest } を追加
+
+### APIの型安全呼び出し
+
+- aspida
+- @aspida/fetch
+
 ### Result型
 
 - neverthrow
@@ -103,3 +116,7 @@
 - nuxt-vitest
 - happy-dom
 - vitest
+
+### NPM Script Utils
+
+- npm-run-all

@@ -31,14 +31,24 @@ export default defineNuxtConfig({
   /**
    * ビルド
    */
-  modules: ['nuxt-vitest'],
+  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', 'nuxt-vitest'],
+  pinia: {
+    autoImports: ['defineStore', 'storeToRefs']
+  },
   alias: {
     '@vitest': '../.tools/vitest'
   },
   typescript: {
     tsConfig: {
       compilerOptions: {
-        types: ['../types/entity.d', 'vitest/importMeta', 'vitest/globals']
+        types: ['vitest/importMeta', 'vitest/globals']
+      }
+    }
+  },
+  vite: {
+    server: {
+      hmr: {
+        port: 24678
       }
     }
   },
@@ -62,7 +72,8 @@ export default defineNuxtConfig({
     public: {
       appMode: 'development',
       loggerLevel: 'debug',
-      debuggingKey: 'debugging'
+      debuggingKey: 'debugging',
+      apiBaseUrl: ''
     }
   }
 })
