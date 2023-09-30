@@ -9,7 +9,7 @@ export default defineVitestConfig({
     include: [],
     exclude: [],
     alias: {
-      '@': path.join(__dirname, '.')
+      '~': path.join(__dirname, './')
     },
     passWithNoTests: true,
     globals: true,
