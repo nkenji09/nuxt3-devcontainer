@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "//": "■■■■■■■■■■■■■■■ hooks ■■■■■■■■■■■■■■■■■■■",
     "dev": "run-p dev:*",
     "commit": "git-cz",
     "build": "run-p build:*",
@@ -19,8 +18,11 @@
     "dev-staging:nuxt": "nuxt dev --dotenv .env.staging",
     "dev-production:nuxt": "nuxt dev --dotenv .env.production",
     "dev:api": "aspida --watch -c aspida.config.cjs",
-    "test": "vitest --watch",
-    "precommit": "lint-staged",
+    "dev:test": "vitest",
+    "ci:test": "run-p ci:test:*",
+    "ci:test:logic": "vitest run",
+    "precommit": "lint-staged && npm run ci:test",
+    "pretest": "nuxt prepare",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {

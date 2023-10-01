@@ -8,16 +8,14 @@ export default defineVitestConfig({
     includeSource: ['**/*.{ts, test.ts}'],
     include: [],
     exclude: [],
-    alias: {
-      '~': path.join(__dirname, './')
-    },
     passWithNoTests: true,
     globals: true,
     silent: false,
-    setupFiles: ['.tools/vitest/vitest.setup.ts']
+    setupFiles: ['.tools/vitest/setup.ts']
   },
   resolve: {
     alias: {
+      '~': path.join(__dirname, '.'),
       '@vitest': path.join(__dirname, '.tools/vitest')
     }
   }

@@ -31,7 +31,13 @@ export default defineNuxtConfig({
   /**
    * ビルド
    */
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', 'nuxt-vitest'],
+  modules: (() => {
+    const modules = ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt']
+    if (isNotProduction) {
+      modules.push('nuxt-vitest')
+    }
+    return modules
+  })(),
   pinia: {
     autoImports: ['defineStore', 'storeToRefs']
   },
